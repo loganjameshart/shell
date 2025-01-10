@@ -14,7 +14,14 @@ ENV = {
 }
 
 
+def update_prompt():
+    """Updates prompt to current working directory. Used in main loop after every function call."""
+    ENV["PROMPT"] = f"~${os.getcwd()} >>>>> "
+
+
+
 """***---Shell functions.---***"""
+
 
 
 def echo(arg:str = None) -> None:
@@ -126,7 +133,9 @@ def quit():
     sys.exit()
 
 
+
 """***---Dispatch control and main shell.---***"""
+
 
 
 DISPATCH = {
@@ -149,7 +158,6 @@ DISPATCH = {
 
 def execute_command(called_function, arg=None):
     """Executes command based upon dispatch table. Passes argument if one is required."""
-    cwd = os.getcwd()
     try:
         if arg:
             DISPATCH[called_function](arg)
@@ -162,6 +170,8 @@ def execute_command(called_function, arg=None):
 def main():
     """Main shell loop."""
     while True:
+        update_prompt()
+
         command = input(f"{ENV['PROMPT']}")
         split_command = command.split(' ', maxsplit=1)
         if len(split_command) == 2:
