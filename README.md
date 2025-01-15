@@ -1,4 +1,4 @@
-# Shell Emulator
+# PyShell
 
 This project is a Python-based shell emulator that mimics basic shell functionalities, allowing users to interact with their file system through commands.
 
